@@ -1,0 +1,14 @@
+name : Comment issue when opened
+on:
+  issues:
+    types:
+      - opened
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - run: g issue comment $ISSUE --body "Thank you for opening this issue!"
+        env: 
+          GITUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{github.event.issue.html_url }}
